@@ -2,6 +2,16 @@
 const hasSymbol = typeof Symbol === 'function'&& Symbol.for;
 export const REACT_ELEMENT_TYPE = hasSymbol?Symbol.for('reate.elment'):0xeac7;
 
+class Component{
+    constructor(props){
+        this.props = props
+    }
+    static isReactComponent = true;
+}
+
+//type是组件的类型，组件又分为自定义组件和标签组件
+//config存放着组件属性，比如className，id等等
+//children存放着节点元素和子节点组件，还有子节点的节点元素
 function createElement(type,config,children){
     let props = {};
     //把config对象的所有属性和值全部复制一份给props；
@@ -26,5 +36,6 @@ function createElement(type,config,children){
 }
 
 export default {
-    createElement
+    createElement,
+    Component
 }
