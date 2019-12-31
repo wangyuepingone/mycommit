@@ -22,12 +22,18 @@ function render(node,parent){
         let element = types.render();
         type = element.type;
         props = element.props;
+        if(typeof type.element === 'function'){
+            return render(element,parent)
+        }
     //如果是函数组件的话就走判断的代码，执行函数，并且返回函数的执行结果，
     //更改他的type和props属性，然后正常运行下面的代码
     }else if(typeof type === 'function'){
         let element=type(props);
         type = element.type;
         props = element.props;
+        if(typeof type.element === 'function'){
+            return render(element,parent)
+        }
     }
     let documentElments=document.createElement(type);
     parent.appendChild(documentElments);
