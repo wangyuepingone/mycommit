@@ -11,24 +11,20 @@ class MouseTracker extends React.Component{
     render(){
         return (
             <div onMouseMove={this.handleMouseMove}>
-                {this.props.render(this.state)}
+                {this.props.children(this.state)}
             </div>
         )
     }
 }
-function withMouseTracker(OldComponent){
-    return props=>(
-        <MouseTracker render={props => <OldComponent {...props}/>}/>
-    )
-}
-let App = props=>(
-    <>
-        <h1>请移动你的鼠标</h1>
-        <p>当前鼠标的位置 x={props.x} y={props.y}</p>
-    </>
-)
-let WithMouseTrackerApp = withMouseTracker(App);
-
 ReactDom.render(<div>
-    <WithMouseTrackerApp />
+    <MouseTracker>
+       {
+           props=>(
+            <>
+                <h1>请移动你的鼠标</h1>
+                <p>当前鼠标的位置 x={props.x} y={props.y}</p>
+            </>
+           )
+       }
+    </MouseTracker>
 </div>, document.getElementById('root'));
