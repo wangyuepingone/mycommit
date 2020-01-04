@@ -33,5 +33,40 @@
   </head>
   <body>
     <div id="root"></div>
+    <script>
+        let root = document.getElementById('root');
+        window.onpushstate = function(state,title,url){
+            root.innerHTML = url;
+            console.log({type:'onpushstate',state:state,pathname:url})
+        };
+
+        (function(history){
+            let pushState = history.pushState;
+            history.pushState = function(state,title,url){
+                pushState.call(history,state,title,url);
+                if(typeof window.onpushstate === 'function'){
+                    window.onpushstate(state,title,url)
+                }
+            }
+        })(window.history);
+
+        window.onpopstate=function(event){
+            // console.log({type:event.type,state:event.state,pathname:window.location.pathname})
+        }
+        setTimeout(()=>{
+            window.history.pushState({page:1},'page1','/page1');
+        },1000);
+        setTimeout(()=>{
+            window.history.pushState({page:2},'page2','/page2')
+        },2000)
+
+        setTimeout(()=>{
+            window.history.pushState({page:3},'page3','/page3')
+        },3000)
+
+        setTimeout(()=>{
+            window.history.go(-1)
+        },4000)
+    </script>
   </body>
 </html>

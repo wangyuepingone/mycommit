@@ -33,5 +33,14 @@
   </head>
   <body>
     <div id="root"></div>
+    <a href="#/a">跳转a路由</a>
+    <a href="#/b">跳转b路由</a>
+    <script>
+        let root = document.getElementById('root')
+        window.addEventListener('hashchange',(event)=>{
+            let hash = window.location.hash;
+            root.innerHTML=hash
+        })
+    </script>
   </body>
 </html>

@@ -1,34 +1,17 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-class MouseTracker extends React.Component{
-    state = {x:0,y:0};
-    handleMouseMove = (event)=>{
-        this.setState({
-            x:event.pageX,
-            y:event.pageY
-        })
-    }
-    render(){
-        return (
-            <div onMouseMove={this.handleMouseMove}>
-                {this.props.render(this.state)}
-            </div>
-        )
-    }
-}
-function withMouseTracker(OldComponent){
-    return props=>(
-        <MouseTracker render={props => <OldComponent {...props}/>}/>
-    )
-}
-let App = props=>(
-    <>
-        <h1>请移动你的鼠标</h1>
-        <p>当前鼠标的位置 x={props.x} y={props.y}</p>
-    </>
-)
-let WithMouseTrackerApp = withMouseTracker(App);
+import { HashRouter as Router,Route} from './react-router-dom';
+import Home from './component/Home'
+import User from './component/User'
+import Profile from './component/Profile'
 
-ReactDom.render(<div>
-    <WithMouseTrackerApp />
-</div>, document.getElementById('root'));
+/**
+ * Router代表的是路由容器
+ * Route代表的是路由匹配规则
+ */
+ReactDom.render(<Router>
+    <Route exact={false} path="/" component={Home}></Route>
+    <Route path="/user" component={User}></Route>
+    <Route path="/profile" component={Profile}></Route>
+    <Route></Route>
+</Router>, document.getElementById('root'));

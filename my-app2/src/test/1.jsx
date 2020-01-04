@@ -1,17 +1,14 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-export interface ContextValue {
-    color: any;
-}
-let ThemeContext = React.createContext<ContextValue | null>(null);
+let ThemeContext = React.createContext(null);
 
 class Title extends React.Component{
     render(){
         return (
             <ThemeContext.Consumer>
             {
-                (value: ContextValue | null) => (
-                    <div style={{ border: `5px solid ${value!.color}` }}>
+                (value) => (
+                    <div style={{ border: `5px solid ${value.color}` }}>
                         title
                     </div>
                 )
@@ -26,8 +23,8 @@ class Header extends React.Component{
         return (
             <ThemeContext.Consumer>
             {
-                (value: ContextValue | null) => (
-                    <div style={{ border: `5px solid ${value!.color}` }}>
+                (value) => (
+                    <div style={{ border: `5px solid ${value.color}` }}>
                         header
                         <Title />
                     </div>
@@ -43,8 +40,8 @@ class Content extends React.Component{
         return (
             <ThemeContext.Consumer>
             {
-                (value: ContextValue | null) => (
-                    <div style={{ border: `5px solid ${value!.color}` }}>
+                (value) => (
+                    <div style={{ border: `5px solid ${value.color}` }}>
                         content
                     </div>
                 )
@@ -60,8 +57,8 @@ class Mian extends React.Component{
         return (
             <ThemeContext.Consumer>
             {
-                (value: ContextValue | null) => (
-                    <div style={{ border: `5px solid ${value!.color}` }}>
+                (value) => (
+                    <div style={{ border: `5px solid ${value.color}` }}>
                         mian
                         <Content />
                     </div>
