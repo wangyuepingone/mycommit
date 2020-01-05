@@ -21,7 +21,9 @@ export default function createStore(reducer,initialState){
     function dispatch(action ){
         state = reducer(state,action);
         listeners.forEach(listener=>listener());
+        return action;
     }
+    dispatch({ type: '@@REDUX_INIT' });
     function subscribe(listener){
         listeners.push(listener);
         return function (){
