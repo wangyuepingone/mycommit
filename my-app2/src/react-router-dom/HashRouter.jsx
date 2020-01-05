@@ -4,7 +4,7 @@ import RouterContext from './context';
 export default class HashRouter extends React.Component{
     state = {
         location:{
-            pathname:window.location.hash.slice(1),
+            pathname:window.location.hash.slice(1)||'/',
             state:window.history.state || null
         }
     }
@@ -13,7 +13,7 @@ export default class HashRouter extends React.Component{
             this.setState({
                 location:{
                     ...this.state.location,
-                    pathname:window.location.hash.slice(1)
+                    pathname:window.location.hash.slice(1)||'/',
                 }
             })
         })
