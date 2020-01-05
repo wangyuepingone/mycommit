@@ -3,25 +3,25 @@ import RouterContext from './context';
 
 export default class HashRouter extends React.Component{
     state = {
-        location:{
-            pathname:window.location.hash.slice(1)||'/',
-            state:window.history.state || null
+        location: {
+            pathname: window.location.hash.slice(1),
+            state: null
         }
     }
-    componentDidMount(){
-        window.addEventListener('hashchange',event=>{
+    componentWillMount() {
+        window.addEventListener('hashchange', (event) => {
             this.setState({
-                location:{
+                location: {
                     ...this.state.location,
-                    pathname:window.location.hash.slice(1)||'/',
+                    pathname: window.location.hash.slice(1) || '/'
                 }
-            })
-        })
+            });
+        });
         window.location.hash = window.location.hash || '/';
     }
     render(){
         let routerValue = {
-            location:this.state.location
+            location: this.state.location
         }
         return (
             <RouterContext.Provider value={routerValue}>

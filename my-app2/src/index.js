@@ -10,8 +10,8 @@ import Profile from './component/Profile'
  * Route代表的是路由匹配规则
  */
 ReactDom.render(<Router>
-    <Route exact={true} path="/" component={Home}></Route>
-    <Route path="/user" component={User}></Route>
-    <Route path="/profile" component={Profile}></Route>
+    <Route exact={true} path='/' component={Home}/>
+    <Route exact={false} path='/user' component={User}/>
+    <Route exact={false} path='/profile' component={Profile}/>
     <Route></Route>
 </Router>, document.getElementById('root'));

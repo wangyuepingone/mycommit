@@ -1,6 +1,6 @@
 import React from 'react';
 import RouterContext from './context';
-import { pathToRegexp } from 'path-to-regexp'
+import pathToRegexp from 'path-to-regexp'
 /**
  * 每一条Route代表一条匹配的规则
  * path属性代表是的当前定义的路径地址
@@ -12,7 +12,7 @@ export default class Route extends React.Component {
     render() {
         let { exact, path, component: RouterComponent } = this.props;
         let pathname = this.context.location.pathname;
-        let paramNames = [];
+        let paramNames = [];    
         let reg = pathToRegexp(path, paramNames, { end: exact });
         if (reg.test(pathname)) {
             return <RouterComponent />
