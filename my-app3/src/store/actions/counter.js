@@ -1,11 +1,11 @@
 import * as TYPES from '../action.types';
 
 function increment(){
-    return {type:TYPES.INCREMENT1}
+    return {type:TYPES.INCREMENT}
 }
 
 function decrement(){
-    return {type:TYPES.DECREMENT1}
+    return {type:TYPES.DECREMENT}
 }
 
 export default{

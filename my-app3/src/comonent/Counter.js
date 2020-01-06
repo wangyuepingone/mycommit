@@ -1,10 +1,15 @@
 import React from 'react';
-export default function Counter(){
+import actions from '../store/actions/counter';
+import { connect } from 'react-redux';
+function Counter(props){
     return (
         <div>
-            <p></p>
-            <button>+1</button>
-            <button>-1</button>
+            <p>{props.number}</p>
+            <button onClick={props.increment}>+1</button>
+            <button onClick={props.decrement}>-1</button>
         </div>
     )
-}
+};
+let mapStateToProps = state=>state.counter;
+let mapDispatchToProps = actions;
+export default connect(mapStateToProps,mapDispatchToProps)(Counter)

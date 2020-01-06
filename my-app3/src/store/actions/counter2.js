@@ -1,14 +1,14 @@
 import * as TYPES from '../action.types';
 
-function increment2(){
+function increment(){
     return {type:TYPES.INCREMENT2}
 }
 
-function decrement2(){
+function decrement(){
     return {type:TYPES.DECREMENT2}
 }
 
 export default{
-    increment2,
-    decrement2
+    increment,
+    decrement
 }

@@ -1,21 +1,16 @@
-import React,{ useState,useEffect } from 'react';
-import { bindActionCreators } from '../redux'
-import store from '../store';
-import actions from '../store/actions/counter1'
-let bindActions = bindActionCreators(actions,store.dispatch);
+import React,{ useState,useEffect,useContext } from 'react';
+import actions from '../store/actions/counter1';
+import { connect } from '../react-redux';
 
-export default function(){
-    let [number,setNumber] = useState(store.getState().counter1.number);
-    useEffect(()=>{
-        return store.subscribe(()=>{
-            setNumber(store.getState().counter1.number)
-        })
-    },[])
+function Counter1(props){
     return (
         <div>
-            <p>{number}</p>
-            <button onClick={()=>bindActions.increment1()}>+1</button>
-            <button onClick={()=>bindActions.decrement1()}>-1</button>
+            <p>{props.number}</p>
+            <button onClick={props.increment}>+1</button>
+            <button onClick={props.decrement}>-1</button>
         </div>
     )
 }
+let mapStateToProps = state=> state.counter1;
+let mapDispatchToProps = actions;
+export default connect(mapStateToProps,mapDispatchToProps)(Counter1)
