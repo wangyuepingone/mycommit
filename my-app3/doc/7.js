@@ -1,4 +1,4 @@
-import { createStore,applyMiddleware } from '../redux';
+import { createStore,compose } from '../redux';
 import reducer from './reducers/';
 
 //logger是我们的中间件函数
@@ -50,6 +50,23 @@ function promise({dispatch,getState}){
 }
 
 //实现中间件
-
+function applyMiddleware(...middlewares){
+    return function(createStore){
+        return function(reducer){
+            let store=createStore(reducer);
+            let dispatch;
+            let middlewaresApi = {
+                getState:store.getState,
+                dispatch:action=>dispatch(action)
+            }
+            let chain = middlewares.map(middleware=>middleware(middlewaresApi));
+            dispatch = compose(...chain)(store.dispatch);
+            return {
+                ...store,
+                dispatch
+            }
+        }
+    }
+}
 let store = applyMiddleware(logger,thunk,promise)(createStore)(reducer);
 export default store;

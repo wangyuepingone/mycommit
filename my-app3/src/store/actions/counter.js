@@ -15,8 +15,16 @@ function thunkAdd(){
         },1000)
     }
 }
+function promiseAdd(){
+    return new Promise(function(resolve,reject){
+        setTimeout(()=>{
+            resolve({type:TYPES.INCREMENT})
+        },1000)
+    })
+}
 export default{
     increment,
     decrement,
-    thunkAdd
+    thunkAdd,
+    promiseAdd
 }
