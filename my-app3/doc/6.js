@@ -25,18 +25,6 @@ function logger({dispatch,getState}){
     }
 }
 
-function thunk({dispatch,getState}){
-    return function(next){
-        return function(action){
-            if(typeof action == 'function'){
-                action(dispatch,getState)
-            }else{
-                next(action)
-            }
-        }
-    }
-}
-
 //实现中间件
 function applyMiddleware(middleware){
     return function(createStore){
@@ -59,5 +47,5 @@ function applyMiddleware(middleware){
         }
     }
 }
-let store = applyMiddleware(thunk)(createStore)(reducer);
+let store = applyMiddleware(logger)(createStore)(reducer);
 export default store;

@@ -1,6 +1,6 @@
 import * as TYPES from '../action.types';
 
-export let initialState = {number:0};
+export let initialState = {number:20};
 export default function(state=initialState,action){
     switch(action.type){
         case TYPES.INCREMENT:
