@@ -7,12 +7,12 @@ import pathToRegexp from 'path-to-regexp'
  * component代表的是当前需要渲染的组件
  * 每一条Route都要拿当前定义的path和context上下文传递过来的path进行判断
  */
-export default class Route extends React.Component {
+export default class extends React.Component {
     static contextType = RouterContext
     render() {
         let { exact, path, component: RouterComponent } = this.props;
         let pathname = this.context.location.pathname;
-        let paramNames = [];    
+        let paramNames = [];
         let reg = pathToRegexp(path, paramNames, { end: exact });
         if (reg.test(pathname)) {
             return <RouterComponent />

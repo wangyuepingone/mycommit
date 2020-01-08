@@ -1,14 +1,13 @@
 import React from 'react';
 import RouterContext from './context';
 
-export default class HashRouter extends React.Component{
+export default class extends React.Component{
     state = {
         location: {
-            pathname: window.location.hash.slice(1),
-            state: null
+            pathname: window.location.hash.slice(1)
         }
     }
-    componentWillMount() {
+    componentDidMount() {
         window.addEventListener('hashchange', (event) => {
             this.setState({
                 location: {

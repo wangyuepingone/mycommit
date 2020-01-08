@@ -1,4 +1,4 @@
-import {createContext} from 'react';
-let context = createContext(null);
+import { createContext } from 'react';
+let RouterContext = createContext(null);
 
-export default context;
+export default RouterContext;
