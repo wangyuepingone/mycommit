@@ -26,10 +26,16 @@ export default class extends React.Component{
     //将最新的location,history,match放入routerValue这个对象里面
     //然后调用context把routerValue传到子组件的props中去，并且渲染子组件
     render(){
-        let routerValue={
-            location:{
-                ...this.state.location
+        let history={
+            location:this.state.location,
+            push(path,state){
+                //更改window.location.hash的路径会触发this.state,他会自动更新数据并且刷新页面
+                window.location.hash = path
             }
+        }
+        let routerValue={
+            location:this.state.location,
+            history
         }
         return(
             <RouterContext.Provider value={routerValue}>
