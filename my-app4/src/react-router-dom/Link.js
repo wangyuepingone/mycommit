@@ -4,7 +4,9 @@ export default class extends React.Component{
     static contextType = RouterContext;
     render(){
         return (
-            <a href={`/#${this.props.to}`} onClick={()=>this.context.history.push(this.props.to)}>{this.props.children}</a>
+            <a href={
+                `/#${typeof this.props.to === 'string'?this.props.to:this.props.to.pathname}`
+            } onClick={()=>this.context.history.push(this.props.to)}>{this.props.children}</a>
         )
     }
 }

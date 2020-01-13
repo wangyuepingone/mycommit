@@ -15,7 +15,7 @@ export default class extends React.Component{
                 location:{
                     ...this.state.location,
                     pathname:window.location.hash.slice(1) || '/',
-                    state:window.history.state
+                    state:this.locationState
                 }
             })
         });
@@ -26,11 +26,18 @@ export default class extends React.Component{
     //将最新的location,history,match放入routerValue这个对象里面
     //然后调用context把routerValue传到子组件的props中去，并且渲染子组件
     render(){
+        let that = this;
         let history={
             location:this.state.location,
-            push(path,state){
+            push(to){
                 //更改window.location.hash的路径会触发this.state,他会自动更新数据并且刷新页面
-                window.location.hash = path
+                if(typeof to === 'object'){
+                    let {pathname,state} = to;
+                    that.locationState = state;
+                    window.location.hash = pathname;
+                }else{
+                    window.location.hash = to;
+                }
             }
         }
         let routerValue={

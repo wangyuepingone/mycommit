@@ -1,10 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { HashRouter as Router,Route,Link,Switch,Redirect } from 'react-router-dom'
+import { HashRouter as Router,Route,Link,Switch,Redirect } from './react-router-dom'
 import Home from './components/Home';
 import User from './components/User';
 import Profile from './components/Profile';
 import Error from './components/Error';
+import Login from './components/login';
+import Private from './components/Private';
 import 'bootstrap/dist/css/bootstrap.css';
 
 ReactDOM.render(<Router>
@@ -18,6 +20,7 @@ ReactDOM.render(<Router>
                     <li><Link to="/">Home</Link></li>
                     <li><Link to="/user">User</Link></li>
                     <li><Link to="/profile">Profile</Link></li>
+                    <li><Link to="/login">Login</Link></li>
                     <li><Link to="/error"></Link></li>
                 </ul>
             </div>
@@ -28,8 +31,9 @@ ReactDOM.render(<Router>
                     <Switch>
                         <Route path="/" component={Home} exact/>
                         <Route path="/user" component={User}/>
-                        <Route path="/profile" component={Profile}/>
+                        <Private path="/profile" component={Profile}/>
                         <Route path="/error" component={Error}/>
+                        <Route path="/login" component={Login}></Route>
                         <Redirect to="/error" />
                     </Switch>
                 </div>

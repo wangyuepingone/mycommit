@@ -10,11 +10,12 @@ export default class extends React.Component{
         //hash路由是基于原生的hash实现的，所以他并没有state属性
         //browhistory是基于window.history实现的，他可以存储state状态
         let user = this.props.location.state;
+        
         if(!user){
             let userStr = localStorage.getItem('users');
             let users = userStr?JSON.parse(userStr):[];
             //users的id和this.props.match.params.id如果匹配成功，那就会把对应的users对象返回给user
-            user = users.find((item)=>item.id == this.props.match.params.id);
+            user = users.find((item)=>item.id === this.props.match.params.id);
         }
         if (user) this.setState({ user });
     }
