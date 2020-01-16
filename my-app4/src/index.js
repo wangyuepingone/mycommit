@@ -1,27 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { HashRouter as Router,Route,Link,Switch,Redirect } from './react-router-dom'
+import { HashRouter as Router,Route,Link,Switch,Redirect,MenuLink } from './react-router-dom'
 import Home from './components/Home';
 import User from './components/User';
 import Profile from './components/Profile';
 import Error from './components/Error';
-import Login from './components/login';
 import Private from './components/Private';
+import Login from './components/login';
+import NavHeader from './components/NavHeader';
+import './components/index.css';
 import 'bootstrap/dist/css/bootstrap.css';
 
 ReactDOM.render(<Router>
     <>
         <div className="navbar navbar-inverse">
             <div className="container-fluid">
-                <div className="navbar-heading">
-                    <div className="navbar-brand">百颜皓翎</div>
-                </div>
+                <NavHeader />
                 <ul className="nav navbar-nav">
-                    <li><Link to="/">Home</Link></li>
-                    <li><Link to="/user">User</Link></li>
-                    <li><Link to="/profile">Profile</Link></li>
-                    <li><Link to="/login">Login</Link></li>
-                    <li><Link to="/error"></Link></li>
+                    <li><MenuLink exact={true} to="/">Home</MenuLink></li>
+                    <li><MenuLink to="/user">User</MenuLink></li>
+                    <li><MenuLink to="/profile">Profile</MenuLink></li>
+                    <li><MenuLink to="/error"></MenuLink></li>
                 </ul>
             </div>
         </div>
@@ -33,7 +32,7 @@ ReactDOM.render(<Router>
                         <Route path="/user" component={User}/>
                         <Private path="/profile" component={Profile}/>
                         <Route path="/error" component={Error}/>
-                        <Route path="/login" component={Login}></Route>
+                        <Route path="/login" component={Login}/>
                         <Redirect to="/error" />
                     </Switch>
                 </div>

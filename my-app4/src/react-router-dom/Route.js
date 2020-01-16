@@ -7,12 +7,18 @@ export default class extends React.Component{
      //如果是精准匹配，那么就看path和pathname是否一样，如果是一样就匹配当前的路径
      //如果不是精准匹配，那么就看以path开头的路径是否和pathname一样，如果一样就匹配，在这里首页也是可以匹配的
     render(){
-        let { path="/",component:RouteComponent,exact=false} = this.props;
+        let { path="/",component:RouteComponent,exact=false,render,children} = this.props;
         //获取到上下文中传递过来的location
         let pathname = this.context.location.pathname;
         let paramsName = [];
         let regexp = pathToRegexp(path,paramsName,{end:exact});
         let result = pathname.match(regexp);
+
+        //构建新的对象，把三个属性传给路由的props
+        let RouterProps = {
+            location:this.context.location,
+            history:this.context.history,
+        }
 
         //获取到paramsName数组中路径参数的key属性
         let paramsKeys = paramsName.map(item =>item.name);
@@ -33,14 +39,23 @@ export default class extends React.Component{
                 params,
             };
             
-            //构建新的对象，把三个属性传给路由的props
-            let RouterProps = {
-                location:this.context.location,
-                history:this.context.history,
-                match
+            //如果是精准匹配就有match属性，如果不是精准匹配就没有match属性
+            RouterProps.match = match;
+            if(RouteComponent){
+                return <RouteComponent {...RouterProps}/>
+            }else if(render){
+                return render(RouterProps)
+            }else if(children){
+                return children(RouterProps)
+            }else{
+                return null;
             }
-            return<RouteComponent {...RouterProps}/>
+        }else{
+            if(children){
+                return children(RouterProps)
+            }else{
+                return null;
+            }
         }
-        return null;
     }
 }
