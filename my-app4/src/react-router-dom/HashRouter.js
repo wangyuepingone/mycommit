@@ -30,6 +30,11 @@ export default class extends React.Component{
         let history={
             location:this.state.location,
             push(to){
+                if(history.message){
+                    let target = typeof to === 'string' ?{pathname:to} :to;
+                    let yes=window.confirm(history.message(target));
+                    if(!yes) return;
+                }
                 //更改window.location.hash的路径会触发this.state,他会自动更新数据并且刷新页面
                 if(typeof to === 'object'){
                     let {pathname,state} = to;
@@ -38,6 +43,12 @@ export default class extends React.Component{
                 }else{
                     window.location.hash = to;
                 }
+            },
+            block(message){
+                history.message = message
+            },
+            unblock(){
+                history.message = null;
             }
         }
         let routerValue={
