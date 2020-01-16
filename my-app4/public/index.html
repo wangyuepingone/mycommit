@@ -28,5 +28,16 @@
   </head>
   <body>
     <div id="root"></div>
+    <script>
+        !(function(history){
+            let pushState = history.pushState;
+            history.pushState = function(state,title,url){
+                if(typeof window.onpushstate === 'function'){
+                    window.onpushstate(state,url);
+                }
+                pushState.apply(history,arguments);
+            }
+        })(window.history);
+    </script>
   </body>
 </html>

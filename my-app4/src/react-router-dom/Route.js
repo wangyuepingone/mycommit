@@ -11,6 +11,7 @@ export default class extends React.Component{
         //获取到上下文中传递过来的location
         let pathname = this.context.location.pathname;
         let paramsName = [];
+        debugger
         let regexp = pathToRegexp(path,paramsName,{end:exact});
         let result = pathname.match(regexp);
 

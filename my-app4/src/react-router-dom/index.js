@@ -5,7 +5,8 @@ import Switch from './Switch';
 import Redirect from './Redirect';
 import MenuLink from './MenuLink';
 import withRouter from './withRouter';
-import Promt from './Promt'
+import Promt from './Promt';
+import BrowserRouter from './BrowserRouter';
 export {
     HashRouter,
     Route,
@@ -14,5 +15,6 @@ export {
     Redirect,
     MenuLink,
     withRouter,
-    Promt
+    Promt,
+    BrowserRouter
 }
